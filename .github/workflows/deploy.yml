@@ -3,7 +3,7 @@ name: Build and deliver containers
 on: push
 
 jobs:
-  preferenceservice:
+  preference-service:
     runs-on: ubuntu-latest
     name: Java 17 build, test, deliver preference-service container
     steps:
@@ -28,8 +28,8 @@ jobs:
         run: docker build -t ${{ secrets.DOCKER_USERNAME }}/preference-service:latest ./preference-service
 
       - name: Upload container to Docker Hub with Push
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/preferenceservice:latest
-  songlibraryservice:
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/preference-service:latest
+  songlibrary-service:
     runs-on: ubuntu-latest
     name: Java 17 build, test, deliver songlibrary-service container
     steps:
@@ -55,7 +55,7 @@ jobs:
 
       - name: Upload container to Docker Hub with Push
         run: docker push ${{ secrets.DOCKER_USERNAME }}/songlibrary-service:latest
-  playlistservice:
+  playlist-service:
     runs-on: ubuntu-latest
     name: Java 17 build, test, deliver playlist-service container
     steps:
