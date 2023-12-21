@@ -38,17 +38,20 @@ public class PlaylistService {
         playlist.setUserId(userId);
 
         PreferenceResponse[] preferenceResonses = webClient.get()
-                .uri("http://" + preferenceServiceBaseUrl + "api/preference",
+                .uri("http://" + preferenceServiceBaseUrl + "/api/preference",
                         uriBuilder -> uriBuilder.queryParam("userId", userId).build())
                 .retrieve()
                 .bodyToMono(PreferenceResponse[].class)
                 .block();
 
         List<PlaylistSong> songList = new ArrayList<>();
+        for (PreferenceResponse pref : preferenceResonses){
+            System.out.println(pref.getName());
+        }
 
         for (PreferenceResponse preference : preferenceResonses){
             String[] codeArray = webClient.get()
-                    .uri("http://"+ songlibraryServiceBaseUrl +"/api/song",
+                    .uri("http://"+ songlibraryServiceBaseUrl +"/api/song/code",
                             uriBuilder -> uriBuilder.queryParam("genre", preference.getName()).build())
                     .retrieve()
                     .bodyToMono(String[].class)

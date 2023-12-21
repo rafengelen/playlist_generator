@@ -22,7 +22,7 @@ public class SongController {
     (@RequestParam String genre) {
         return songService.getSongCodesByGenre(genre);
     }
-    @GetMapping("")
+    @GetMapping()
     @ResponseStatus(HttpStatus.OK)
     public SongResponse getSongByCode
             (@RequestParam String code) {

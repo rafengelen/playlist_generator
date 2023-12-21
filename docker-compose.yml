@@ -1,0 +1,88 @@
+services:
+ mongo-preferences:
+  image: mongo:latest
+  ports:
+    - 27017:27017
+  volumes:
+    - mongodb_preference_data:/data/db
+    
+ mysql-playlist:
+  image: mysql:latest
+  ports:
+    - 3306:3306
+  volumes:
+    - mysql_playlist_data:/var/lib/mysql
+  environment:
+   MYSQL_ROOT_PASSWORD: abc123
+    
+ mysql-songlibrary:
+  image: mysql:latest
+  ports:
+    - 3307:3306
+  volumes:
+    - mysql_songlibrary_data:/var/lib/mysql
+  environment:
+   MYSQL_ROOT_PASSWORD: abc123
+    
+ preference-service:
+  depends_on:
+    - mongo-preferences
+  image: rafengelen/preference-service
+  ports:
+    - 8080:8080
+  links:
+    - mongo-preferences
+  environment:
+   MONGODB_PORT: 27017
+   MONGODB_HOST: mongo-preferences
+   
+ songlibrary-service:
+  depends_on:
+    - mysql-songlibrary
+  image: rafengelen/songlibrary-service
+  ports:
+    - 8082:8082
+  links:
+    - mysql-songlibrary
+  environment:
+   MYSQL_DB_USERNAME: root
+   MYSQL_DB_PASSWORD: abc123
+   MYSQL_DB_HOST: mysql-songlibrary
+   MYSQL_DB_PORT: 3307
+
+ playlist-service:
+  depends_on:
+    - preference-service
+    - songlibrary-service
+  image: rafengelen/playlist-service
+  ports:
+    - 8081:8081
+  links:
+    - preference-service
+    - songlibrary-service
+  environment:
+   PREFERENCE_SERVICE_BASEURL: preference-service:8080
+   SONGLIBRARY_INFO_SERVICE_BASEURL: songlibrary-service:8082
+   MYSQL_DB_USERNAME: root
+   MYSQL_DB_PASSWORD: abc123
+   MYSQL_DB_HOST: mysql-playlist
+   MYSQL_DB_PORT: 3306
+
+ #api-gateway:
+  # depends_on:
+   #  - preference-service
+    # - playlist-service
+#   image: rafengelen/ede-api-gateway
+ #  ports:
+  #   - 8083:8083
+   #links:
+    # - preference-service
+     #- playlist-service
+#   environment:
+ #    PREFERENCE_SERVICE_BASEURL: preference-service:8080
+  #   PLAYLIST_SERVICE_BASEURL: playlist-service:8081
+
+volumes:
+ mongodb_preference_data:
+ mysql_songlibrary_data:
+ mysql_playlist_data:
