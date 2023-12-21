@@ -52,17 +52,19 @@ services:
 
  playlist-service:
   depends_on:
+    - mysql-playlist
     - preference-service
     - songlibrary-service
   image: rafengelen/playlist-service
   ports:
     - 8081:8081
   links:
+    - mysql-playlist
     - preference-service
     - songlibrary-service
   environment:
    PREFERENCE_SERVICE_BASEURL: preference-service:8080
-   SONGLIBRARY_INFO_SERVICE_BASEURL: songlibrary-service:8082
+   SONGLIBRARY_SERVICE_BASEURL: songlibrary-service:8082
    MYSQL_DB_USERNAME: root
    MYSQL_DB_PASSWORD: abc123
    MYSQL_DB_HOST: mysql-playlist
