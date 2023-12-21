@@ -1,0 +1,42 @@
+server:
+  port: 8083
+
+logging:
+  level:
+    root: INFO
+    org.springframework.cloud.gateway: TRACE
+    org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator: INFO
+    reactor.netty: TRACE
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: preference-service
+          uri: http://${PREFERENCE_SERVICE_BASEURL:localhost:8080}
+          predicates:
+            - Path=/preferences
+            - Method=POST
+          filters:
+            - SetPath=/api/preference
+        - id: preference-service-user
+          uri: http://${PREFERENCE_SERVICE_BASEURL:localhost:8080}
+          predicates:
+            - Path=/preferences
+            - Method=GET
+          filters:
+            - SetPath=/api/preference
+        - id: playlist-service-user
+          uri: http://${PLAYLIST_SERVICE_BASEURL:localhost:8081}
+          predicates:
+            - Path=/playlists
+            - Method=GET
+          filters:
+            - SetPath=/api/playlist
+        - id: playlist-service
+          uri: http://${PLAYLIST_SERVICE_BASEURL:localhost:8081}
+          predicates:
+            - Path=/playlists
+            - Method=POST
+          filters:
+            - SetPath=/api/playlist

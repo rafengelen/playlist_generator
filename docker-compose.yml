@@ -70,19 +70,19 @@ services:
    MYSQL_DB_HOST: mysql-playlist
    MYSQL_DB_PORT: 3306
 
- #api-gateway:
-  # depends_on:
-   #  - preference-service
-    # - playlist-service
-#   image: rafengelen/ede-api-gateway
- #  ports:
-  #   - 8083:8083
-   #links:
-    # - preference-service
-     #- playlist-service
-#   environment:
- #    PREFERENCE_SERVICE_BASEURL: preference-service:8080
-  #   PLAYLIST_SERVICE_BASEURL: playlist-service:8081
+ api-gateway:
+   depends_on:
+     - preference-service
+     - playlist-service
+   image: rafengelen/ede-api-gateway
+   ports:
+     - 8083:8083
+   links:
+     - preference-service
+     - playlist-service
+   environment:
+     PREFERENCE_SERVICE_BASEURL: preference-service:8080
+     PLAYLIST_SERVICE_BASEURL: playlist-service:8081
 
 volumes:
  mongodb_preference_data:

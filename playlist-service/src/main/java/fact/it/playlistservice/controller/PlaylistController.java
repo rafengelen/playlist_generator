@@ -24,7 +24,7 @@ public class PlaylistController {
         return (hasWorked ? "Playlist generated successfully" : "Playlist could not generate");
     }
 
-    @GetMapping("user")
+    @GetMapping()
     @ResponseStatus(HttpStatus.OK)
     public List<PlaylistResponse> getAllPlaylistsByUserId(@RequestParam String userId) {
         return playlistService.getAllPlaylistsByUserId(userId);
