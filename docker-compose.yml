@@ -1,7 +1,7 @@
-networks:
-  preference: {}
-  songlibrary: {}
-  playlist: {}
+#networks:
+ # preference: {}
+  #songlibrary: {}
+  #playlist: {}
 
 
 
@@ -12,8 +12,8 @@ services:
     - 27017:27017
   volumes:
     - mongodb_preference_data:/data/db
-  networks:
-    - preference
+  #networks:
+   # - preference
     
  mysql-playlist:
   image: mysql:latest
@@ -23,8 +23,8 @@ services:
     - mysql_playlist_data:/var/lib/mysql
   environment:
    MYSQL_ROOT_PASSWORD: abc123
-  networks:
-    - playlist
+  #networks:
+   # - playlist
     
  mysql-songlibrary:
   image: mysql:latest
@@ -34,8 +34,8 @@ services:
     - mysql_songlibrary_data:/var/lib/mysql
   environment:
    MYSQL_ROOT_PASSWORD: abc123
-  networks:
-    - songlibrary
+  #networks:
+   # - songlibrary
     
  preference-service:
   depends_on:
@@ -48,8 +48,8 @@ services:
   environment:
    MONGODB_PORT: 27017
    MONGODB_HOST: mongo-preferences
-  networks:
-    - preference
+  #networks:
+   # - preference
    
  songlibrary-service:
   depends_on:
@@ -64,8 +64,8 @@ services:
    MYSQL_DB_PASSWORD: abc123
    MYSQL_DB_HOST: mysql-songlibrary
    MYSQL_DB_PORT: 3307
-  networks:
-    - songlibrary
+  #networks:
+   # - songlibrary
 
  playlist-service:
   depends_on:
@@ -86,8 +86,8 @@ services:
    MYSQL_DB_PASSWORD: abc123
    MYSQL_DB_HOST: mysql-playlist
    MYSQL_DB_PORT: 3306
-  networks:
-    - playlist
+  #networks:
+   # - playlist
 
  api-gateway:
    depends_on:
