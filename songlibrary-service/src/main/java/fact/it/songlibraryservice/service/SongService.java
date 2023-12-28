@@ -73,14 +73,14 @@ public class SongService {
             withoutMe.setBand("Eminem");
             withoutMe.setGenre("Hip hop");
             withoutMe.setCode(UUID.randomUUID().toString());
-            songRepository.save(withoutMe)
+            songRepository.save(withoutMe);
        
             Song loseYourself = new Song();
             loseYourself.setTitle("Lose Yourself");
             loseYourself.setBand("Eminem");
             loseYourself.setGenre("Hip hop");
             loseYourself.setCode(UUID.randomUUID().toString());
-            songRepository.save(loseYourself)
+            songRepository.save(loseYourself);
 
             // Eminem - When I'm Gone
             Song whenImGone = new Song();
@@ -88,7 +88,7 @@ public class SongService {
             whenImGone.setBand("Eminem");
             whenImGone.setGenre("Hip hop");
             whenImGone.setCode(UUID.randomUUID().toString());
-            songRepository.save(whenImGone)
+            songRepository.save(whenImGone);
 
             // Eminem - Not Afraid
             Song notAfraid = new Song();
@@ -96,14 +96,14 @@ public class SongService {
             notAfraid.setBand("Eminem");
             notAfraid.setGenre("Hip hop");
             notAfraid.setCode(UUID.randomUUID().toString());
-            songRepository.save(notAfraid)
+            songRepository.save(notAfraid);
             // Eminem - Venom
             Song venom = new Song();
             venom.setTitle("Venom");
             venom.setBand("Eminem");
             venom.setGenre("Hip hop");
             venom.setCode(UUID.randomUUID().toString());
-            songRepository.save(venom)
+            songRepository.save(venom);
         }
 
 
