@@ -50,7 +50,7 @@ services:
    MONGODB_HOST: mongo-preferences
   #networks:
    # - preference
-   
+  
  songlibrary-service:
   depends_on:
     - mysql-songlibrary
