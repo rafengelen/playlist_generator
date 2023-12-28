@@ -1,12 +1,12 @@
 services:
- mongo-preferences:
+ mongopreferences:
   image: mongo:latest
   ports:
     - 27017:27017
   volumes:
     - mongodb_preference_data:/data/db
     
- mysql-playlist:
+ mysqlplaylist:
   image: mysql:latest
   ports:
     - 3306:3306
@@ -15,7 +15,7 @@ services:
   environment:
    MYSQL_ROOT_PASSWORD: abc123
     
- mysql-songlibrary:
+ mysqlsonglibrary:
   image: mysql:latest
   ports:
     - 3307:3306
@@ -26,40 +26,40 @@ services:
     
  preference-service:
   depends_on:
-    - mongo-preferences
+    - mongopreferences
   image: rafengelen/preference-service
   ports:
     - 8080:8080
   links:
-    - mongo-preferences
+    - mongopreferences
   environment:
    MONGODB_PORT: 27017
-   MONGODB_HOST: mongo-preferences
+   MONGODB_HOST: mongopreferences
   
  songlibrary-service:
   depends_on:
-    - mysql-songlibrary
+    - mysqlsonglibrary
   image: rafengelen/songlibrary-service
   ports:
     - 8082:8082
   links:
-    - mysql-songlibrary
+    - mysqlsonglibrary
   environment:
    MYSQL_DB_USERNAME: root
    MYSQL_DB_PASSWORD: abc123
-   MYSQL_DB_HOST: mysql-songlibrary
-   MYSQL_DB_PORT: 3306
+   MYSQL_DB_HOST: mysqlsonglibrary
+   MYSQL_DB_PORT: 3307
 
  playlist-service:
   depends_on:
-    - mysql-playlist
+    - mysqlplaylist
     - preference-service
     - songlibrary-service
   image: rafengelen/playlist-service
   ports:
     - 8081:8081
   links:
-    - mysql-playlist
+    - mysqlplaylist
     - preference-service
     - songlibrary-service
   environment:
@@ -67,7 +67,7 @@ services:
    SONGLIBRARY_SERVICE_BASEURL: songlibrary-service:8082
    MYSQL_DB_USERNAME: root
    MYSQL_DB_PASSWORD: abc123
-   MYSQL_DB_HOST: mysql-playlist
+   MYSQL_DB_HOST: mysqlplaylist
    MYSQL_DB_PORT: 3306
 
  api-gateway:
