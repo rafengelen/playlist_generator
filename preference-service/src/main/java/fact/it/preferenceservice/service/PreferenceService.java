@@ -32,6 +32,15 @@ public class PreferenceService {
         return preferences.stream().map(this::mapToPreferenceResponse).toList();
     }
 
+    public PreferenceResponse updatePreference(PreferenceRequest preferenceRequest, String code) {
+        Preference preference = preferenceRepository.findByCode(code);
+
+        preference.setName(preferenceRequest.getName());
+
+        preferenceRepository.save(preference);
+
+        return this.mapToPreferenceResponse(preference);
+    }
 
     private PreferenceResponse mapToPreferenceResponse(Preference preference) {
         return PreferenceResponse.builder()

@@ -26,6 +26,13 @@ spring:
             - Method=GET
           filters:
             - SetPath=/api/preference
+        - id: preference-service
+          uri: http://${PREFERENCE_SERVICE_BASEURL:localhost:8080}
+          predicates:
+            - Path=/preferences
+            - Method=PUT
+          filters:
+            - SetPath=/api/preference
 
         - id: playlist-service-user
           uri: http://${PLAYLIST_SERVICE_BASEURL:localhost:8081}

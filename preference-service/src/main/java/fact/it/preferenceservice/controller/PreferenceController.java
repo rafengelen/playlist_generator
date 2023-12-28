@@ -30,12 +30,12 @@ public class PreferenceController {
         return preferenceService.getPreferencesByUserId(userId);
     }
 
-    /*@PutMapping
+    @PutMapping
     @ResponseStatus(HttpStatus.OK)
     public PreferenceResponse updatePreference
             (@RequestBody PreferenceRequest preferenceRequest, @RequestParam String code){
-
-    }*/
+        return preferenceService.updatePreference(preferenceRequest, code);
+    }
 
 }
 
