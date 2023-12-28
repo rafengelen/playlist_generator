@@ -30,5 +30,12 @@ public class PreferenceController {
         return preferenceService.getPreferencesByUserId(userId);
     }
 
+    /*@PutMapping
+    @ResponseStatus(HttpStatus.OK)
+    public PreferenceResponse updatePreference
+            (@RequestBody PreferenceRequest preferenceRequest, @RequestParam String code){
+
+    }*/
+
 }
 

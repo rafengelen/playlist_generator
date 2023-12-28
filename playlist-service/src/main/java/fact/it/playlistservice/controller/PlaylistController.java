@@ -31,11 +31,11 @@ public class PlaylistController {
 
     }
 
-    @GetMapping("/code")
+    /*@GetMapping("/code")
     @ResponseStatus(HttpStatus.OK)
-    public PlaylistResponse getAllPlaylistsByCode(@RequestParam String code) {
+    public PlaylistResponse getPlaylistsByCode(@RequestParam String code) {
         return playlistService.getPlaylistByCode(code);
-    }
+    }*/
 
     @DeleteMapping()
     @ResponseStatus(HttpStatus.OK)

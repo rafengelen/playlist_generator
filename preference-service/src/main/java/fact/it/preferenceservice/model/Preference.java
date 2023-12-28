@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 @Data
 public class Preference {
     private String id;
-    //private String code;
+    private String code;
     private String name;
     private String userId;
 }
