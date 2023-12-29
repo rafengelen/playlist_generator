@@ -17,14 +17,16 @@ public class SecurityConfig {
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity serverHttpSecurity) {
         serverHttpSecurity
                 .authorizeExchange(exchange ->
-                        exchange.pathMatchers(HttpMethod.GET,"/products")
+                        exchange.pathMatchers(HttpMethod.GET,"/preferences")
                                 .permitAll()
                                 .anyExchange()
                                 .authenticated()
+
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(withDefaults())
                 );
+
         return serverHttpSecurity.build();
     }
 
