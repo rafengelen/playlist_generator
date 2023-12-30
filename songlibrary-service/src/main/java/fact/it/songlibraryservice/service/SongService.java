@@ -1,5 +1,6 @@
 package fact.it.songlibraryservice.service;
 
+import fact.it.songlibraryservice.dto.SongRequest;
 import fact.it.songlibraryservice.dto.SongResponse;
 import fact.it.songlibraryservice.model.Song;
 import fact.it.songlibraryservice.repository.SongRepository;
@@ -129,5 +130,17 @@ public class SongService {
                 .linkSpotify(song.getLinkSpotify())
                 .linkYoutube(song.getLinkYoutube())
                 .build();
+    }
+
+    public void createSong(SongRequest songRequest) {
+        Song song = new Song();
+        song.setCode(UUID.randomUUID().toString());
+        song.setBand(songRequest.getBand());
+        song.setTitle(songRequest.getTitle());
+        song.setLinkSpotify(songRequest.getLinkSpotify());
+        song.setLinkYoutube(songRequest.getLinkYoutube());
+        song.setGenre(songRequest.getGenre());
+        songRepository.save(song);
+
     }
 }

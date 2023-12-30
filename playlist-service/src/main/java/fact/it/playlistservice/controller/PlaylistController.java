@@ -31,12 +31,6 @@ public class PlaylistController {
 
     }
 
-    /*@GetMapping("/code")
-    @ResponseStatus(HttpStatus.OK)
-    public PlaylistResponse getPlaylistsByCode(@RequestParam String code) {
-        return playlistService.getPlaylistByCode(code);
-    }*/
-
     @DeleteMapping()
     @ResponseStatus(HttpStatus.OK)
     public void deletePlaylist(@RequestParam String code) {

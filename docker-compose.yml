@@ -80,9 +80,11 @@ services:
    links:
      - preference-service
      - playlist-service
+     - songlibrary-service
    environment:
      PREFERENCE_SERVICE_BASEURL: preference-service:8080
      PLAYLIST_SERVICE_BASEURL: playlist-service:8081
+     SONGLIBRARY_SERVICE_BASEURL: songlibrary-service:8082
 
 volumes:
  mongodb_preference_data:

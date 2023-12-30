@@ -67,3 +67,11 @@ spring:
             - Method=DELETE
           filters:
             - SetPath=/api/playlist
+
+        - id: songlibrary-service
+          uri: http://${SONGLIBRARY_SERVICE_BASEURL:localhost:8082}
+          predicates:
+            - Path=/songs
+            - Method=POST
+          filters:
+            - SetPath=/api/song

@@ -14,4 +14,5 @@ import java.math.BigDecimal;
 public class PreferenceRequest {
     private String name;
     private String userId;
+
 }

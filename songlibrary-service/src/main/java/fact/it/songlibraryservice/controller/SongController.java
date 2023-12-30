@@ -2,6 +2,7 @@ package fact.it.songlibraryservice.controller;
 
 
 import fact.it.songlibraryservice.dto.SongResponse;
+import fact.it.songlibraryservice.dto.SongRequest;
 import fact.it.songlibraryservice.service.SongService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,5 +28,12 @@ public class SongController {
     public SongResponse getSongByCode
             (@RequestParam String code) {
         return songService.getSongByCode(code);
+    }
+
+    @PostMapping()
+    @ResponseStatus(HttpStatus.OK)
+    public void CreateSong
+            (@RequestBody SongRequest songrequest) {
+        songService.createSong(songrequest);
     }
 }
