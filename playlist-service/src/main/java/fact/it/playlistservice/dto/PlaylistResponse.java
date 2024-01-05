@@ -13,5 +13,6 @@ import java.util.List;
 @Builder
 public class PlaylistResponse {
     private String code;
-    private List<PlaylistSong> songList;
+    private String userId;
+    private List<SongDto> songList;
 }
