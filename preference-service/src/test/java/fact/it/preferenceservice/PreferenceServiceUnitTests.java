@@ -28,10 +28,6 @@ public class PreferenceServiceUnitTests {
     private PreferenceRepository preferenceRepository;
 
     @Test
-    void contextLoads() {
-    }
-
-    @Test
     public void testCreatePreference(){
         //ARRANGE
         String name = "name";

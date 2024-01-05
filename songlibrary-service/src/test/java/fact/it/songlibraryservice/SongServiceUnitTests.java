@@ -1,5 +1,5 @@
-package fact.it.songlibraryservice;
 
+package fact.it.songlibraryservice;
 
 import fact.it.songlibraryservice.dto.SongResponse;
 import fact.it.songlibraryservice.model.Song;
@@ -11,11 +11,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.when;
 import java.util.Arrays;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class SongServiceUnitTests {
