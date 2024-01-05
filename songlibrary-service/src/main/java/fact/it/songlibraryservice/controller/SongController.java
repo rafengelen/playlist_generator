@@ -32,7 +32,7 @@ public class SongController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.OK)
-    public void CreateSong
+    public void createSong
             (@RequestBody SongRequest songrequest) {
         songService.createSong(songrequest);
     }

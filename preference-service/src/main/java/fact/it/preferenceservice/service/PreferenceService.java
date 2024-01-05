@@ -16,7 +16,7 @@ public class PreferenceService {
 
     private final PreferenceRepository preferenceRepository;
 
-    public void createPreference(PreferenceRequest preferenceRequest){
+    public Preference createPreference(PreferenceRequest preferenceRequest){
         Preference preference = Preference.builder()
                 .name(preferenceRequest.getName())
                 .userId(preferenceRequest.getUserId())
@@ -24,6 +24,7 @@ public class PreferenceService {
                 .build();
 
         preferenceRepository.save(preference);
+        return preference;
     }
     //Users kunnen enkel hun eigen preferences opvragen
     public List<PreferenceResponse> getPreferencesByUserId(String userId) {
@@ -44,7 +45,6 @@ public class PreferenceService {
 
     private PreferenceResponse mapToPreferenceResponse(Preference preference) {
         return PreferenceResponse.builder()
-                .id(preference.getId())
                 .name(preference.getName())
                 .userId(preference.getUserId())
                 .code(preference.getCode())

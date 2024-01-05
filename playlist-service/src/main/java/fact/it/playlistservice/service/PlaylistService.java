@@ -35,10 +35,11 @@ public class PlaylistService {
     public boolean generatePlaylist(String userId){
         Playlist playlist = new Playlist();
         playlist.setCode(UUID.randomUUID().toString());
+
         playlist.setUserId(userId);
 
         PreferenceResponse[] preferenceResonses = webClient.get()
-                .uri("http://" + preferenceServiceBaseUrl + "/api/preference",
+                .uri("http://" + preferenceServiceBaseUrl + "/api/preference/user",
                         uriBuilder -> uriBuilder.queryParam("userId", userId).build())
                 .retrieve()
                 .bodyToMono(PreferenceResponse[].class)
@@ -86,14 +87,20 @@ public class PlaylistService {
                         playlist.getPlaylistSongList()
                 )).toList();
     }
-    public PlaylistResponse getPlaylistByCode(String code){
+    /*public PlaylistResponse getPlaylistByCode(String code){
         Playlist playlist = playlistRepository.findByCode(code);
 
         return new PlaylistResponse(playlist.getCode(),playlist.getPlaylistSongList());
+    }*/
+
+
+    public void deletePlaylist(String code, String userId) {
+        Playlist playlist = playlistRepository.findByCode(code);
+        if (userId.equals(playlist.getUserId())){
+            playlistRepository.deleteByCode(code);
+        }
+
     }
 
 
-    public void deletePlaylist(String code) {
-        playlistRepository.deleteByCode(code);
-    }
 }
