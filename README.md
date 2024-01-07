@@ -19,15 +19,37 @@ Componenten van de applicatie:
 | Api-gateway   |Microservice die het verkeer regelt van buitenaf naar de applicatie. Ook gebruiken we deze gateway als een Oauth2 resource server. Zo zijn de api endpoints naar buitenaf beveiligd.|
 
 ## API endpoints
-
+### Preference service
+| request | Uitleg |
+| --------------- | --------------- |
 |POST (gateway)/preferences?name= (AUTH)|Er wordt een nieuwe preference aangemaakt. De naam wordt uit de parameters gehaald en de user wordt gehaald uit de bearer token.|
 ![postman test: post preference](assets/post_preferences.JPG)
 
+| request | Uitleg |
+| --------------- | --------------- |
 |GET (gateway)/preferences (AUTH)|Alle preferences worden opgehaald van de user. De user wordt nagekeken via de bearer token. |
 ![postman test: get preferences](assets/get_preferences.JPG)
 
+| request | Uitleg |
+| --------------- | --------------- |
 |PUT (gateway)/preferences?code= (AUTH)|Bestaande preference met code die uit de parameters wordt gehaald. Wordt vervangen door de meegestuurde body. De id van gebruiker in de preference moet dezelfde zijn als degene in de bearer token.|
 ![postman test: put preference](assets/put_preferences.JPG)
 
+| request | Uitleg |
+| --------------- | --------------- |
 |GET (preference-service)/api/preference/user?userId=|Alle preferences van een gebruiker worden opgehaald. De userId komt vanuit de parameters. Deze api call is enkel voor intern gebruik en wordt gebruikt door de api-gateway.|
 ![postman test: get preferences (intern gebruik)](assets/get_preferences_intern.JPG)
+
+### Songlibrary service
+
+| request | Uitleg |
+| --------------- | --------------- |
+|GET (songlibrary-service)/api/song/code?genre=|De codes van liedjes van het meegegeven genre worden opgehaald. Deze api call is enkel voor intern gebruik en wordt gebruikt door de api-gateway tijdens het genereren van een playlist.|
+![postman test: get songcodes](assets/get_songcodes.JPG)
+
+| request | Uitleg |
+| --------------- | --------------- |
+GET (songlibrary-service)/api/song?code=|Liedje met een bepaalde code wordt opgehaald. Deze api call is enkel voor intern gebruik en wordt gebruikt door de api-gateway tijdens het lezen van een playlist.|
+![postman test: get song](assets/get_song.JPG)
+
+### Playlist service

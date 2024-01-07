@@ -27,7 +27,7 @@ services:
  preference-service:
   depends_on:
     - mongopreferences
-  image: rafengelen/preference-service
+  image: rafengelen/preference-service:latest
   ports:
     - 8080:8080
   links:
@@ -39,7 +39,7 @@ services:
  songlibrary-service:
   depends_on:
     - mysqlsonglibrary
-  image: rafengelen/songlibrary-service
+  image: rafengelen/songlibrary-service:latest
   ports:
     - 8082:8082
   links:
@@ -55,7 +55,7 @@ services:
     - mysqlplaylist
     - preference-service
     - songlibrary-service
-  image: rafengelen/playlist-service
+  image: rafengelen/playlist-service:latest
   ports:
     - 8081:8081
   links:
@@ -74,7 +74,7 @@ services:
    depends_on:
      - preference-service
      - playlist-service
-   image: rafengelen/ede-api-gateway
+   image: rafengelen/ede-api-gateway:latest
    ports:
      - 8083:8083
    links:
