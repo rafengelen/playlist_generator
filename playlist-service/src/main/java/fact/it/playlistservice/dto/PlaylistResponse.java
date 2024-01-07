@@ -15,4 +15,5 @@ public class PlaylistResponse {
     private String code;
     private String userId;
     private List<SongDto> songList;
+    private boolean isPublic;
 }

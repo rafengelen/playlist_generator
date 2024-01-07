@@ -1,5 +1,6 @@
 package fact.it.playlistservice.repository;
 
+import fact.it.playlistservice.dto.PlaylistResponse;
 import fact.it.playlistservice.model.Playlist;
 import fact.it.playlistservice.model.PlaylistSong;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,4 +13,6 @@ public interface PlaylistRepository extends JpaRepository<Playlist, Long> {
     Playlist findByCode(String code);
 
     void deleteByCode(String code);
+    List<Playlist> findAllByIsPublicTrue();
+
 }

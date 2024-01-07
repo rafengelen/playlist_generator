@@ -19,7 +19,7 @@ public class SecurityConfig {
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity serverHttpSecurity) {
         serverHttpSecurity
                 .authorizeExchange(exchange ->
-                        exchange.pathMatchers(HttpMethod.GET,"/preferences")
+                        exchange.pathMatchers(HttpMethod.GET,"/playlists/public")
                                 .permitAll()
                                 .anyExchange()
                                 .authenticated()

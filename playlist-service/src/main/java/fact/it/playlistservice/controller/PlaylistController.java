@@ -20,10 +20,10 @@ public class PlaylistController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
-    public String generatePlaylist(@RequestHeader("Authorization") String authorizationHeader) {
+    public String generatePlaylist(@RequestParam boolean isPublic, @RequestHeader("Authorization") String authorizationHeader) {
         String jwtToken = authorizationHeader.replace("Bearer ", "");
         String userId = JwtDecoder.getUserId(jwtToken);
-        boolean hasWorked = playlistService.generatePlaylist(userId);
+        boolean hasWorked = playlistService.generatePlaylist(userId, isPublic);
         return (hasWorked ? "Playlist generated successfully" : "Playlist could not generate");
     }
 
@@ -33,6 +33,13 @@ public class PlaylistController {
         String jwtToken = authorizationHeader.replace("Bearer ", "");
         String userId = JwtDecoder.getUserId(jwtToken);
         return playlistService.getAllPlaylistsByUserId(userId);
+
+    }
+
+    @GetMapping("public")
+    @ResponseStatus(HttpStatus.OK)
+    public List<PlaylistResponse> getAllPublicPlaylists() {
+        return playlistService.getAllPublicPlaylists();
 
     }
 

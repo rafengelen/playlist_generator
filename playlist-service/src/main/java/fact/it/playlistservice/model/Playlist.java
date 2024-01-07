@@ -20,6 +20,7 @@ public class Playlist {
     private Long id;
     private String userId;
     private String code;
+    private boolean isPublic;
 
 
     @OneToMany(cascade = CascadeType.ALL)

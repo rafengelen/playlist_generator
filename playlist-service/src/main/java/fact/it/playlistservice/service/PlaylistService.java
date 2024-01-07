@@ -35,9 +35,10 @@ public class PlaylistService {
     @Value("${songlibraryservice.baseurl}")
     private String songlibraryServiceBaseUrl;
 
-    public boolean generatePlaylist(String userId){
+    public boolean generatePlaylist(String userId, boolean isPublic){
         Playlist playlist = new Playlist();
         playlist.setCode(UUID.randomUUID().toString());
+        playlist.setPublic(isPublic);
 
         playlist.setUserId(userId);
 
@@ -87,7 +88,9 @@ public class PlaylistService {
                 .map(this::mapToPlaylistResponse).toList();
     }
 
-
+    public List<PlaylistResponse> getAllPublicPlaylists() {
+        return playlistRepository.findAllByIsPublicTrue().stream().map(this::mapToPlaylistResponse).toList();
+    }
 
     public void deletePlaylist(String code, String userId) {
         Playlist playlist = playlistRepository.findByCode(code);
@@ -115,7 +118,9 @@ public class PlaylistService {
                     .userId(playlist.getUserId())
                     .code(playlist.getCode())
                     .songList(songList)
+                    .isPublic(playlist.isPublic())
                     .build();
         }
+
 
 }
