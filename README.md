@@ -60,3 +60,43 @@ GET (songlibrary-service)/api/song?code=|Liedje met een bepaalde code wordt opge
 ![postman test: get song](assets/get_song.JPG)
 
 ### Playlist service
+
+| request | Uitleg |
+| --------------- | --------------- |
+POST (gateway)/playlists?isPublic= (AUTH)|Genereert een playlist waarvan isPublic uit de parameters wordt gehaald en de userId uit de bearer token. Bij het oproepen van de bijhorende methode in de service zullen er api calls worden gemaakt naar de preference-service en naar de songlibrary-service.|
+
+![postman test: post playlist1](assets/post_playlist.JPG)
+
+![postman test: post playlist2](assets/post_playlist2.JPG)
+
+| request | Uitleg |
+| --------------- | --------------- |
+|GET (gateway)/playlists (AUTH)|Haalt alle playlists op van een gebruiker. De userId wordt uit de bearer token gehaald.|
+
+![postman test: post playlist1](assets/get_playlist.JPG)
+
+| request | Uitleg |
+| --------------- | --------------- |
+|GET (gateway)/playlists/public|Alle playlists worden opgehaald waarbij isPublic waar is. Dit kan worden uitgevoerd zonder bearer token. Bij het oproepen van de bijhorende methode in de service zullen er api calls worden gemaakt naar de preference-service en naar de songlibrary-service.|
+
+![postman test: post playlist1](assets/get_publicplaylist.JPG)
+
+| request | Uitleg |
+| --------------- | --------------- |
+|DELETE (gateway)/playlists?code= (AUTH)|Verwijderd een playlist met code vanuit de parameters. Er wordt nagekeken of de userId vanuit de bearer token dezelfde is als die van de playlist.|
+
+![postman test: post playlist1](assets/delete_playlist.JPG)
+
+## Deployment
+De online versie van deze applicatie wordt gehost op okteto onder de namespace “rafengelen”. Hier zijn de links naar de containers:
+
+| Container | Link |
+| --------------- | --------------- |
+| Api-gateway    | https://api-gateway-rafengelen.cloud.okteto.net |
+| Preference-service    |https://preference-service-rafengelen.cloud.okteto.net|
+| Songlibrary-service    |https://songlibrary-service-rafengelen.cloud.okteto.net|
+| Playlist-service    |https://playlist-service-rafengelen.cloud.okteto.net|
+
+## Besluit
+
+Volgens de minimum requerements moet ik minstens 3 GET, 1 POST, 1 PUT en 1 DELETE endpoints hebben op de gateway. Aan deze requirement voldoet mijn project zeker. Verder heb ik gebruik gemaakt van 2 keer een SQL database en 1 keer een mongodb database. Vervolgens lijken mijn paths vrij logisch, vaak wordt er bij een POST request een volledige body meegegeven, dit is bij mij niet altijd het geval (bij bijvoorbeeld POST /playlists) omdat het merendeel van de data gegenereerd wordt door de applicatie. Daardoor moet er enkel maar worden meegegeven of een playlist publiek moet zijn.
