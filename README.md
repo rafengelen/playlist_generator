@@ -18,3 +18,16 @@ Componenten van de applicatie:
 | Playlist-service   | Microservice waar de playlist api zich in bevindt. Requests sturen naar deze api om playlists te laten genereren, verwijderen of te lezen. De microservice maakt ook gebruik van de andere microservices. Door de preferences op te halen van gebruikers om daarna met die preferences liedjes op te halen.|
 | Api-gateway   |Microservice die het verkeer regelt van buitenaf naar de applicatie. Ook gebruiken we deze gateway als een Oauth2 resource server. Zo zijn de api endpoints naar buitenaf beveiligd.|
 
+## API endpoints
+
+|POST (gateway)/preferences?name= (AUTH)|Er wordt een nieuwe preference aangemaakt. De naam wordt uit de parameters gehaald en de user wordt gehaald uit de bearer token.|
+![postman test: post preference](assets/post_preferences.JPG)
+
+|GET (gateway)/preferences (AUTH)|Alle preferences worden opgehaald van de user. De user wordt nagekeken via de bearer token. |
+![postman test: get preferences](assets/get_preferences.JPG)
+
+|PUT (gateway)/preferences?code= (AUTH)|Bestaande preference met code die uit de parameters wordt gehaald. Wordt vervangen door de meegestuurde body. De id van gebruiker in de preference moet dezelfde zijn als degene in de bearer token.|
+![postman test: put preference](assets/put_preferences.JPG)
+
+|GET (preference-service)/api/preference/user?userId=|Alle preferences van een gebruiker worden opgehaald. De userId komt vanuit de parameters. Deze api call is enkel voor intern gebruik en wordt gebruikt door de api-gateway.|
+![postman test: get preferences (intern gebruik)](assets/get_preferences_intern.JPG)
